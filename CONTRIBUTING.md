@@ -1,32 +1,32 @@
-# Quy tắc Đóng góp và Sử dụng AI (Team Rules)
+# Quy Tắc Mã Nguồn & Sử Dụng AI
 
-Dự án này là Public theo yêu cầu của Giảng viên. Mọi dấu vết làm việc phải minh bạch.
+Mọi đóng góp vào dự án cần tuân thủ nghiêm ngặt các quy tắc sau để đảm bảo tính minh bạch và chất lượng kiến trúc.
 
-## 1. Quy tắc Commit Message (BẮT BUỘC)
-Để theo dõi chính xác đóng góp của Người và AI, mọi commit message phải tuân thủ format sau:
+## 1. Quy tắc Commit Git (Bắt buộc)
+Mọi lần thay đổi mã nguồn phải sử dụng mẫu Commit đa dòng dưới đây (Dùng tính năng Commit trong VS Code GUI thay vì lệnh terminal để tránh lỗi format):
 
-`[Loại]: [Mô tả ngắn gọn] | Human: [Chi tiết con người làm] | AI: [Chi tiết AI hỗ trợ]`
+```text
+[Loại]: [Tóm tắt công việc]
 
-**Các Loại (Loại):**
-- `feat`: Thêm tính năng / Pattern mới
-- `fix`: Sửa lỗi
-- `docs`: Cập nhật tài liệu
-- `test`: Thêm test case
+Chi tiết:
+- (Các file đã sửa, logic đã thêm...)
+- (Chỉ rõ nguyên lý OOP hoặc Pattern đang được áp dụng...)
 
-**Ví dụ Commit Hợp lệ:**
-- `feat: implement Factory Pattern cho Notification | Human: Thiết kế interface và luồng logic | AI: Generate boiler-plate code cho các class con.`
-- `test: thêm test case check null email | Human: Xác định edge cases cần test | AI: Viết code xUnit/JUnit dựa trên mô tả.`
-- `docs: cập nhật UML diagram | Human: Vẽ tay sơ đồ | AI: Chuyển đổi ý tưởng thành cú pháp Mermaid/PlantUML.`
+AI thực hiện:
+- (AI đã gợi ý giải pháp nào hoặc sinh ra đoạn code boilerplate nào?)
+- (Ghi "Không sử dụng" nếu tự code 100%)
 
-**Lưu ý:** Không dùng lệnh `git commit -m "update code"`.
+Người can thiệp:
+- (Chỉ định rõ quyết định thiết kế của con người: ví dụ refactor lại tên biến, cấu trúc lại logic, ghép nối các class...)
+```
+*Các loại (Type):* `feat` (Tính năng), `fix` (Sửa lỗi), `docs` (Tài liệu), `refactor` (Tối ưu code), `test` (Kiểm thử).
 
 ## 2. Quy tắc sử dụng AI (AI Usage Policy)
-- **ĐƯỢC PHÉP:** Dùng AI để debug, tạo boilerplate code, giải thích lỗi, gợi ý tên biến, viết comment, viết test case dựa trên logic đã có.
-- **KHÔNG ĐƯỢC PHÉP:** Yêu cầu AI "Viết toàn bộ file báo cáo" hoặc "Viết toàn bộ hệ thống". 
-- Bạn **PHẢI** hiểu 100% từng dòng code được merge vào nhánh chính. Thầy sẽ hỏi ngẫu nhiên trong buổi Live Defense.
-- Mọi prompt quan trọng dùng với AI phải được copy và dán vào file `/docs/AI_USAGE_LOG.md`.
+- **Minh bạch:** Bất kỳ đoạn code cốt lõi nào do AI gợi ý phải được giải thích lại bằng comment của con người trong source code.
+- **Thẩm định:** Người dùng chịu trách nhiệm 100% về code được push. Cấm copy-paste mã nguồn nếu không thể giải thích được luồng chạy (Call stack) và nguyên lý OOP áp dụng bên trong.
+- Toàn bộ các câu lệnh điều khiển AI (Prompts) quan trọng liên quan đến kiến trúc phải được lưu trữ để kết xuất vào `AI_USAGE_LOG`.
 
-## 3. Quy tắc Branching (Nhánh)
-- Nhánh `main`: Chỉ chứa code đã hoàn chỉnh, chạy được và đã review.
-- Tạo nhánh riêng cho mỗi pattern: `feature/factory-pattern`, `feature/decorator-pattern`.
-- Tạo Pull Request (PR) và người còn lại phải Approve mới được merge vào `main`.
+## 3. Quy tắc Kiến trúc
+- Không tạo "God class" (Class ôm đồm mọi chức năng).
+- Phải áp dụng tính Đóng gói (Encapsulation) triệt để: Sử dụng `private` fields và `public properties` có logic kiểm duyệt (Validation).
+- Các class cốt lõi phải dựa vào Abstraction (Interface/Abstract class) thay vì implementation cụ thể.

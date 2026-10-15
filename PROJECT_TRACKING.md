@@ -1,53 +1,42 @@
-# Project Tracking & Task Assignments (2-Week Sprint)
+# Workflow & Task Assignments
 
-Tiến độ được rút ngắn từ 4 tuần xuống 2 tuần. Yêu cầu hai thành viên cập nhật file này (`[x]`) mỗi khi hoàn thành task.
+Dự án được chia thành các Giai đoạn (Phases) nối tiếp nhau. Hoàn thành `[x]` từng task để sang giai đoạn tiếp theo.
 
-## Week 1: Core Architecture & Setup (Ngày 1 - Ngày 7)
-**Mục tiêu:** Xây dựng khung OOP cơ bản và 2 patterns đầu tiên.
+## Giai đoạn 1: Nền Tảng (Core Foundation)
+*Mục tiêu: Xây dựng bộ khung cơ sở vững chắc. Cả hai thành viên cùng làm (Pair-programming) hoặc review chéo trực tiếp.*
 
-- [ ] **Ngày 1-2: Khởi tạo & Base Classes**
-  - [ ] Thiết lập GitHub Repo, add collaborator.
-  - [ ] Cài đặt môi trường (C# / Java). Tạo khung project.
-  - [ ] Tạo Abstract Base Class `Notification` và các lớp con `EmailNotification`, `SMSNotification` (Thể hiện tính Abstraction & Inheritance).
-  - *Assignee:* Cả hai cùng setup, Member 1 code base classes.
+- [ ] Khởi tạo dự án C# Console (`dotnet new console`).
+- [ ] Thiết kế Abstract Base Class `Notification` (Áp dụng Encapsulation, định nghĩa Abstraction).
+- [ ] Thiết kế các Subclasses cơ bản: `EmailNotification`, `SMSNotification` (Áp dụng Polymorphism).
+- [ ] Viết test case (Happy path) để khởi tạo và in ra thông tin Base classes.
+- [ ] **Review:** Đảm bảo không có trường dữ liệu nào là `public`, mọi truy cập qua Properties/Methods.
 
-- [ ] **Ngày 3-4: Factory Method Pattern (Creational)**
-  - [ ] Implement `NotificationFactory` để tạo thông báo.
-  - [ ] Viết Tự giải trình (Self-Explanation): Vấn đề trước khi dùng Factory vs Sau khi dùng.
-  - *Assignee:* Member 2.
+## Giai đoạn 2: Phân Chia Triển Khai Design Patterns
+*Mục tiêu: Chia đôi luồng công việc để tối ưu thời gian. Mỗi người chịu trách nhiệm code và tự giải trình cho Pattern của mình.*
 
-- [ ] **Ngày 5-6: Decorator Pattern (Structural)**
-  - [ ] Implement `NotificationDecorator` (Ví dụ: `EncryptedDecorator`).
-  - [ ] Viết Test Case cơ bản (Happy path) cho việc khởi tạo và trang trí thông báo.
-  - *Assignee:* Member 1.
+**Thành viên A ([Tên Thành viên A]):**
+- [ ] **Factory Method Pattern:** Cài đặt `NotificationFactory` để khởi tạo Email/SMS.
+- [ ] **Decorator Pattern:** Cài đặt abstract `NotificationDecorator` và `EncryptedDecorator`.
+- [ ] Viết Tự giải trình (Self-Explanation): Vấn đề trước khi dùng (Code smell) & Giải pháp áp dụng OOP.
 
-- [ ] **Ngày 7: Review Week 1 & Merge**
-  - [ ] Code review chéo. Đảm bảo tuân thủ Encapsulation (các fields phải private, dùng properties/getters).
-  - *Assignee:* Cả hai.
+**Thành viên B ([Tên Thành viên B]):**
+- [ ] **Strategy Pattern:** Cài đặt giao diện `IDispatchStrategy` và các concrete strategy (VD: Gửi đồng bộ, Gửi bất đồng bộ).
+- [ ] **Observer Pattern:** Cài đặt cơ chế Event/Observer để lắng nghe trạng thái gửi tin (VD: `SystemLogger`).
+- [ ] Viết Tự giải trình (Self-Explanation): Vấn đề trước khi dùng (Code smell) & Giải pháp áp dụng OOP.
 
-## Week 2: Behavioral Patterns, Testing & Documentation (Ngày 8 - Ngày 14)
-**Mục tiêu:** Hoàn thiện 2 patterns còn lại, viết Tests và Báo cáo.
+## Giai đoạn 3: Tích Hợp & Minh Chứng OCP
+*Mục tiêu: Gộp code, xử lý tương tác giữa các patterns và chứng minh hệ thống dễ mở rộng.*
 
-- [ ] **Ngày 8-9: Strategy Pattern (Behavioral 1)**
-  - [ ] Implement `IDispatchStrategy` (InstantDispatch, ScheduledDispatch).
-  - [ ] Tích hợp vào hệ thống, chứng minh tính Đa hình (Polymorphism).
-  - *Assignee:* Member 2.
+- [ ] Gộp toàn bộ mã nguồn (Merge code). Cả hai cùng kiểm tra xung đột (Conflicts).
+- [ ] Cài đặt kịch bản luồng chính (End-to-End Test): Tạo thông báo bằng Factory -> Bọc bằng Decorator -> Gửi bằng Strategy -> Ghi log bằng Observer.
+- [ ] Cài đặt kịch bản xử lý lỗi (Error/Validation Test): Bắt lỗi khi người dùng nhập sai định dạng hoặc thiếu dữ liệu.
+- [ ] **Chứng minh Open/Closed Principle:** Cùng nhau thêm 1 loại thông báo mới (VD: `PushNotification`) chỉ bằng cách thêm class, tuyệt đối KHÔNG sửa code cũ.
 
-- [ ] **Ngày 10-11: Observer Pattern (Behavioral 2) & Edge Cases**
-  - [ ] Implement Publisher/Subscriber để theo dõi trạng thái gửi (Success/Fail).
-  - [ ] Viết Test Case bắt lỗi (Ví dụ: Nội dung rỗng, thiếu địa chỉ nhận).
-  - *Assignee:* Member 1.
+## Giai đoạn 4: Hoàn Thiện & Báo Cáo
+*Mục tiêu: Dọn dẹp mã nguồn, xuất tài liệu và chuẩn bị bảo vệ.*
 
-- [ ] **Ngày 12: Chứng minh Open/Closed Principle (Quan trọng!)**
-  - [ ] Thêm một loại thông báo mới (vd: `PushNotification`) hoặc Strategy mới mà **không sửa code cũ**.
-  - [ ] Viết Test Case cho tính đa hình này.
-  - *Assignee:* Cả hai cùng làm.
-
-- [ ] **Ngày 13: Documentation & UML**
-  - [ ] Vẽ UML Class Diagram hoàn chỉnh.
-  - [ ] Hoàn thiện thư mục `/docs`: Chốt file Tự giải trình (Self-Explanation) cho 4 patterns.
-  - [ ] Tổng hợp file `AI_USAGE_LOG.md`.
-
-- [ ] **Ngày 14: Rehearsal (Chuẩn bị bảo vệ)**
-  - [ ] Push code Final.
-  - [ ] Hai người tự đặt câu hỏi và trả lời chéo về code để chuẩn bị cho buổi Live Defense.
+- [ ] Refactor mã nguồn (Đảm bảo Separation of Concerns - không có "God class").
+- [ ] Vẽ UML Class Diagram hoàn chỉnh cho toàn hệ thống.
+- [ ] Tổng hợp file Tự giải trình các nguyên lý (Encapsulation, Polymorphism, Abstraction, OCP, SoC).
+- [ ] Tổng hợp file AI Usage Log từ lịch sử Commit Git.
+- [ ] Review chéo mã nguồn để chuẩn bị Live-defense.
