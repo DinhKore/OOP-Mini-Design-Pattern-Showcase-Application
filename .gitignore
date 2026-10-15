@@ -1,10 +1,7 @@
-# .NET / C#
-bin/
-obj/
-*.user
-*.suo
-*.userosscache
-*.sln.docstates
+# Compiled class file
+*.class
 
-# VS Code
+# IDE files
 .vscode/
+.idea/
+*.iml
