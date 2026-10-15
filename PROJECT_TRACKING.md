@@ -5,11 +5,11 @@ Dự án được chia thành các Giai đoạn (Phases) nối tiếp nhau. Hoà
 ## Giai đoạn 1: Nền Tảng (Core Foundation)
 *Mục tiêu: Xây dựng bộ khung cơ sở vững chắc. Cả hai thành viên cùng làm (Pair-programming) hoặc review chéo trực tiếp.*
 
-- [ ] Khởi tạo dự án C# Console (`dotnet new console`).
-- [ ] Thiết kế Abstract Base Class `Notification` (Áp dụng Encapsulation, định nghĩa Abstraction).
-- [ ] Thiết kế các Subclasses cơ bản: `EmailNotification`, `SMSNotification` (Áp dụng Polymorphism).
-- [ ] Viết test case (Happy path) để khởi tạo và in ra thông tin Base classes.
-- [ ] **Review:** Đảm bảo không có trường dữ liệu nào là `public`, mọi truy cập qua Properties/Methods.
+- [x] Khởi tạo dự án Java.
+- [x] Thiết kế Abstract Base Class `Notification` (Áp dụng Encapsulation, định nghĩa Abstraction).
+- [x] Thiết kế các Subclasses cơ bản: `EmailNotification`, `SMSNotification` (Áp dụng Polymorphism).
+- [x] Viết test case (Happy path) để khởi tạo và in ra thông tin Base classes.
+- [x] **Review:** Đảm bảo không có trường dữ liệu nào là `public`, mọi truy cập qua Properties/Methods.
 
 ## Giai đoạn 2: Phân Chia Triển Khai Design Patterns
 *Mục tiêu: Chia đôi luồng công việc để tối ưu thời gian. Mỗi người chịu trách nhiệm code và tự giải trình cho Pattern của mình.*
