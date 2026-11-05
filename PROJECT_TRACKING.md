@@ -22,7 +22,7 @@ Dự án được chia thành các Giai đoạn (Phases) nối tiếp nhau. Hoà
 **Thành viên B (Trần Đức Trung):**
 - [x] **Strategy Pattern:** Cài đặt giao diện `IDispatchStrategy` và các concrete strategy (VD: Gửi đồng bộ, Gửi bất đồng bộ).
 - [x] **Observer Pattern:** Cài đặt cơ chế Event/Observer để lắng nghe trạng thái gửi tin (VD: `SystemLogger`).
-- [x] Viết Tự giải trình (Self-Explanation): Vấn đề trước khi dùng (Code smell) & Giải pháp áp dụng OOP. Xem `AI_USAGE_LOG_TranDucTrung.md`.
+- [ ] Viết Tự giải trình (Self-Explanation): Vấn đề trước khi dùng (Code smell) & Giải pháp áp dụng OOP.
 
 ## Giai đoạn 3: Tích Hợp & Minh Chứng OCP
 *Mục tiêu: Gộp code, xử lý tương tác giữa các patterns và chứng minh hệ thống dễ mở rộng.*
