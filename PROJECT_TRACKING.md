@@ -27,9 +27,9 @@ Dự án được chia thành các Giai đoạn (Phases) nối tiếp nhau. Hoà
 ## Giai đoạn 3: Tích Hợp & Minh Chứng OCP
 *Mục tiêu: Gộp code, xử lý tương tác giữa các patterns và chứng minh hệ thống dễ mở rộng.*
 
-- [ ] Gộp toàn bộ mã nguồn (Merge code). Cả hai cùng kiểm tra xung đột (Conflicts).
-- [ ] Cài đặt kịch bản luồng chính (End-to-End Test): Tạo thông báo bằng Factory -> Bọc bằng Decorator -> Gửi bằng Strategy -> Ghi log bằng Observer.
-- [ ] Cài đặt kịch bản xử lý lỗi (Error/Validation Test): Bắt lỗi khi người dùng nhập sai định dạng hoặc thiếu dữ liệu.
+- [x] Gộp toàn bộ mã nguồn (Merge code). Cả hai cùng kiểm tra xung đột (Conflicts).
+- [x] Cài đặt kịch bản luồng chính (End-to-End Test): Tạo thông báo bằng Factory -> Bọc bằng Decorator -> Gửi bằng Strategy -> Ghi log bằng Observer.
+- [x] Cài đặt kịch bản xử lý lỗi (Error/Validation Test): Bắt lỗi khi người dùng nhập sai định dạng hoặc thiếu dữ liệu.
 - [ ] **Chứng minh Open/Closed Principle:** Cùng nhau thêm 1 loại thông báo mới (VD: `PushNotification`) chỉ bằng cách thêm class, tuyệt đối KHÔNG sửa code cũ.
 
 ## Giai đoạn 4: Hoàn Thiện & Báo Cáo
