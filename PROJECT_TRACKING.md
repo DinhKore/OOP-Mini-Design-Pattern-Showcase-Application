@@ -14,15 +14,15 @@ Dự án được chia thành các Giai đoạn (Phases) nối tiếp nhau. Hoà
 ## Giai đoạn 2: Phân Chia Triển Khai Design Patterns
 *Mục tiêu: Chia đôi luồng công việc để tối ưu thời gian. Mỗi người chịu trách nhiệm code và tự giải trình cho Pattern của mình.*
 
-**Thành viên A ([Tên Thành viên A]):**
+**Thành viên A (Hàn Minh Đính):**
 - [ ] **Factory Method Pattern:** Cài đặt `NotificationFactory` để khởi tạo Email/SMS.
 - [ ] **Decorator Pattern:** Cài đặt abstract `NotificationDecorator` và `EncryptedDecorator`.
 - [ ] Viết Tự giải trình (Self-Explanation): Vấn đề trước khi dùng (Code smell) & Giải pháp áp dụng OOP.
 
-**Thành viên B ([Tên Thành viên B]):**
-- [ ] **Strategy Pattern:** Cài đặt giao diện `IDispatchStrategy` và các concrete strategy (VD: Gửi đồng bộ, Gửi bất đồng bộ).
-- [ ] **Observer Pattern:** Cài đặt cơ chế Event/Observer để lắng nghe trạng thái gửi tin (VD: `SystemLogger`).
-- [ ] Viết Tự giải trình (Self-Explanation): Vấn đề trước khi dùng (Code smell) & Giải pháp áp dụng OOP.
+**Thành viên B (Trần Đức Trung):**
+- [x] **Strategy Pattern:** Cài đặt giao diện `IDispatchStrategy` và các concrete strategy (VD: Gửi đồng bộ, Gửi bất đồng bộ).
+- [x] **Observer Pattern:** Cài đặt cơ chế Event/Observer để lắng nghe trạng thái gửi tin (VD: `SystemLogger`).
+- [x] Viết Tự giải trình (Self-Explanation): Vấn đề trước khi dùng (Code smell) & Giải pháp áp dụng OOP. Xem `AI_USAGE_LOG_TranDucTrung.md`.
 
 ## Giai đoạn 3: Tích Hợp & Minh Chứng OCP
 *Mục tiêu: Gộp code, xử lý tương tác giữa các patterns và chứng minh hệ thống dễ mở rộng.*

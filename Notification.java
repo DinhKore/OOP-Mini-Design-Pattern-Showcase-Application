@@ -40,6 +40,9 @@ public abstract class Notification {
 
     public abstract String prepareContent();
 
+    // Mỗi kênh tự kiểm tra dữ liệu lúc gửi. Dispatcher không cần if/else theo loại thông báo.
+    public abstract void validateDelivery();
+
     public String getDetails() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return String.format("[ID: %s] %s | To: %s\nContent: %s",

@@ -18,4 +18,11 @@ public class EmailNotification extends Notification {
     public String prepareContent() {
         return String.format("[Email - Subject: %s]\n%s", subject, getMessage());
     }
+
+    @Override
+    public void validateDelivery() {
+        if (!getRecipient().matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$")) {
+            throw new IllegalArgumentException("Invalid email address: " + getRecipient());
+        }
+    }
 }
