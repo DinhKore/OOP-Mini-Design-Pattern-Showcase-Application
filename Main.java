@@ -7,14 +7,15 @@ public class Main {
 
         List<Notification> notifications = new ArrayList<>();
 
-        notifications.add(new EmailNotification(
+        notifications.add(NotificationFactory.createNotification("email",
                 "dinhkore@gmail.com",
-                "OOP Project Meeting",
-                "Let's meet at 8 PM to finalize our progress."));
+                "Let's meet at 8 PM to finalize our progress.",
+                "OOP Project Meeting"));
 
-        notifications.add(new SMSNotification(
+        notifications.add(NotificationFactory.createNotification("sms",
                 "0901234567",
-                "Your OTP code is: 123456"));
+                "Your OTP code is: 123456",
+                null));
 
         for (Notification note : notifications) {
             System.out.println(note.getDetails());

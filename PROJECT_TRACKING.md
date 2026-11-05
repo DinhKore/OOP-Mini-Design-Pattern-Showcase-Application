@@ -14,12 +14,12 @@ Dự án được chia thành các Giai đoạn (Phases) nối tiếp nhau. Hoà
 ## Giai đoạn 2: Phân Chia Triển Khai Design Patterns
 *Mục tiêu: Chia đôi luồng công việc để tối ưu thời gian. Mỗi người chịu trách nhiệm code và tự giải trình cho Pattern của mình.*
 
-**Thành viên A ([Tên Thành viên A]):**
-- [ ] **Factory Method Pattern:** Cài đặt `NotificationFactory` để khởi tạo Email/SMS.
+**Thành viên A ([Hàn Minh Đính - 22110021]):**
+- [x] **Factory Method Pattern:** Cài đặt `NotificationFactory` để khởi tạo Email/SMS.
 - [ ] **Decorator Pattern:** Cài đặt abstract `NotificationDecorator` và `EncryptedDecorator`.
 - [ ] Viết Tự giải trình (Self-Explanation): Vấn đề trước khi dùng (Code smell) & Giải pháp áp dụng OOP.
 
-**Thành viên B ([Tên Thành viên B]):**
+**Thành viên B ([Trần Đức Trung - 22110084]):**
 - [ ] **Strategy Pattern:** Cài đặt giao diện `IDispatchStrategy` và các concrete strategy (VD: Gửi đồng bộ, Gửi bất đồng bộ).
 - [ ] **Observer Pattern:** Cài đặt cơ chế Event/Observer để lắng nghe trạng thái gửi tin (VD: `SystemLogger`).
 - [ ] Viết Tự giải trình (Self-Explanation): Vấn đề trước khi dùng (Code smell) & Giải pháp áp dụng OOP.
