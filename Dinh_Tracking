@@ -13,3 +13,21 @@ feat: Triển khai Factory Method Pattern (Creational)
 - Khởi tạo file NotificationFactory.java - đống gói logic khởi tạo
 - Cập nhật hàm Main để sử dụng Factory thay vì dùng từ khóa new trực tiếp
 - Chạy thử nghiệm biên dịch và xác nhận kết quả qua Terminal.
+
+
+feat: Hoàn thiện Decorator Pattern mã hóa và cập nhật kiểm thử Main
+
+[Chi tiết]
+- Tạo lớp trừu tượng NotificationDecorator.java kế thừa Notification, chứa tham chiếu wrappedNotification.
+- Tạo lớp EncryptedDecorator.java kế thừa NotificationDecorator, ghi đè prepareContent() để mã hóa Base64.
+- Cập nhật Main.java: Bọc email bằng EncryptedDecorator và thêm đối tượng đã bọc (encryptedEmail) vào danh sách hiển thị.
+- Biên dịch qua thư mục class/ và kiểm thử luồng chạy trên Terminal, xác nhận nội dung email hiển thị chuỗi [ENCRYPTED].
+
+[AI làm]
+- Hướng dẫn thiết kế cấu trúc Decorator Pattern (Abstract Decorator và Concrete Decorator) chuẩn OOP.
+- Soát lỗi logic thêm nhầm đối tượng gốc thay vì đối tượng bọc decorator trong Main.java.
+
+[Người làm]
+- Tự tạo các file NotificationDecorator.java, EncryptedDecorator.java và thêm mã nguồn vô từng file.
+- Sửa lại dòng add trong Main.java để truyền đúng encryptedEmail.
+- Trực tiếp chạy biên dịch qua Terminal, kiểm tra kết quả in ra đúng định dạng và thực hiện commit.
