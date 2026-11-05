@@ -1,0 +1,15 @@
+feat: Triển khai Factory Method Pattern (Creational)
+
+[Chi tiết]
+- Khởi tạo NotificationFactory.java để đóng gói logic tạo đối tượng thông báo.
+- Cập nhật Main.java: Xóa bỏ các lệnh gọi 'new' trực tiếp, chuyển sang dùng factory.
+- Đảm bảo Open/Closed Principle khi thêm loại thông báo mới trong tương lai.
+
+[AI làm]
+- Gợi ý mã nguồn NotificationFactory áp dụng switch-case và xử lý validation.
+- Gợi ý thay đổi hàm Main.java thay vì sử dụng new thì sử dụng hàm gọi để sử dụng pattern.
+
+[Người làm]
+- Khởi tạo file NotificationFactory.java - đống gói logic khởi tạo
+- Cập nhật hàm Main để sử dụng Factory thay vì dùng từ khóa new trực tiếp
+- Chạy thử nghiệm biên dịch và xác nhận kết quả qua Terminal.
