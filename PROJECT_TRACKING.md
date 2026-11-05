@@ -15,8 +15,8 @@ Dự án được chia thành các Giai đoạn (Phases) nối tiếp nhau. Hoà
 *Mục tiêu: Chia đôi luồng công việc để tối ưu thời gian. Mỗi người chịu trách nhiệm code và tự giải trình cho Pattern của mình.*
 
 **Thành viên A (Hàn Minh Đính):**
-- [ ] **Factory Method Pattern:** Cài đặt `NotificationFactory` để khởi tạo Email/SMS.
-- [ ] **Decorator Pattern:** Cài đặt abstract `NotificationDecorator` và `EncryptedDecorator`.
+- [x] **Factory Method Pattern:** Cài đặt `NotificationFactory` để khởi tạo Email/SMS.
+- [x] **Decorator Pattern:** Cài đặt abstract `NotificationDecorator` và `EncryptedDecorator`.
 - [ ] Viết Tự giải trình (Self-Explanation): Vấn đề trước khi dùng (Code smell) & Giải pháp áp dụng OOP.
 
 **Thành viên B (Trần Đức Trung):**
