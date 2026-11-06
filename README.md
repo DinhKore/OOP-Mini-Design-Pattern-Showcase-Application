@@ -86,26 +86,125 @@ OOP-Mini-Design-Pattern-Showcase-Application/
 
 ## 5. Hướng Dẫn Biên Dịch & Chạy Ứng Dụng (Build & Run)
 
-### Yêu cầu môi trường:
-- **Java Development Kit (JDK):** Java 17 LTS hoặc Java 21 LTS trở lên.
+### 5.1. Yêu cầu môi trường
+* Đã cài đặt **Java Development Kit (JDK 17 LTS hoặc JDK 21 LTS trở lên)**.
+* Kiểm tra phiên bản bằng lệnh:
+  ```bash
+  java -version
+  javac -version
+  ```
 
-### Lệnh biên dịch (Chạy được trên mọi Terminal: CMD, PowerShell, Bash, Git Bash):
+---
+
+### 5.2. Cách 1: Chạy nhanh qua Dòng lệnh (Terminal / CLI)
+Lệnh dưới đây hoạt động chuẩn xác trên **mọi hệ điều hành và mọi trình dòng lệnh** (Windows Command Prompt `cmd`, PowerShell, macOS Terminal, Linux Bash, Git Bash, VS Code Terminal):
+
+#### Bước 1: Biên dịch mã nguồn (Compile)
+Đứng tại thư mục gốc của dự án (`OOP-Mini-Design-Pattern-Showcase-Application/`), chạy:
 ```bash
 javac -d bin -sourcepath src src/Main.java
 ```
+> **Giải thích:** Tham số `-sourcepath src` hướng dẫn trình biên dịch tự động tìm nạp và biên dịch toàn bộ các lớp phụ thuộc trong các package (`model`, `factory`, `decorator`, `strategy`, `observer`, `dispatcher`) vào thư mục `bin/`.
 
-*(Hoặc dùng lệnh quét đệ quy nếu muốn)*:
-- **PowerShell:** `javac -d bin (Get-ChildItem -Recurse src/*.java | ForEach-Object { $_.FullName })`
-- **Linux / macOS / Bash:** `javac -d bin $(find src -name "*.java")`
-
-### Lệnh chạy demo:
+#### Bước 2: Chạy ứng dụng (Run)
 ```bash
 java -cp bin Main
 ```
 
 ---
 
-## 6. Minh Chứng Kiểm Thử Tích Hợp (Test Scenarios)
+#### 💡 Mẹo chạy gộp trong 1 dòng lệnh duy nhất (One-liner):
+* **Trên Windows Command Prompt (CMD):**
+  ```cmd
+  javac -d bin -sourcepath src src/Main.java && java -cp bin Main
+  ```
+* **Trên PowerShell / VS Code Terminal / Git Bash / macOS / Linux:**
+  ```powershell
+  javac -d bin -sourcepath src src/Main.java; java -cp bin Main
+  ```
+
+---
+
+### 5.3. Cách 2: Chạy bằng Visual Studio Code (VS Code)
+1. Mở thư mục dự án `OOP-Mini-Design-Pattern-Showcase-Application` bằng VS Code (`File > Open Folder...`).
+2. Cài đặt tiện ích mở rộng **Extension Pack for Java** (của Microsoft) nếu chưa có.
+3. Điều hướng mở file: `src/Main.java`.
+4. Nhấn nút **Run** (biểu tượng mũi tên tam giác màu xanh ở góc trên bên phải) hoặc phím tắt `F5` / `Ctrl + F5`.
+
+---
+
+### 5.4. Cách 3: Chạy bằng IntelliJ IDEA / Eclipse
+1. Mở IDE $\rightarrow$ chọn **Open** $\rightarrow$ chọn thư mục dự án.
+2. Đảm bảo thư mục `src` được đánh dấu là **Sources Root** (Nếu chưa: Chuột phải vào thư mục `src` $\rightarrow$ `Mark Directory as` $\rightarrow$ `Sources Root`).
+3. Chuột phải vào file `src/Main.java` $\rightarrow$ chọn **Run 'Main.main()'**.
+
+---
+
+### 5.5. Xử lý sự cố thường gặp (Troubleshooting)
+* **Lỗi `'javac' is not recognized as an internal or external command`:**  
+  $\rightarrow$ Bạn chưa cài JDK hoặc chưa cấu hình biến môi trường `PATH`. Hãy cài đặt JDK (khuyến nghị OpenJDK 21) và thêm đường dẫn `bin` của JDK vào biến `PATH`.
+* **Lỗi `'ForEach-Object' is not recognized...`:**  
+  $\rightarrow$ Lỗi xảy ra do bạn gõ nhầm lệnh của PowerShell vào cửa sổ Windows CMD. Hãy dùng lệnh biên dịch đa năng: `javac -d bin -sourcepath src src/Main.java`.
+
+---
+
+## 6. Kết Quả Chạy Mẫu (Expected Output Preview)
+Khi chạy thành công, console sẽ hiển thị toàn bộ 4 kịch bản kiểm thử pass 100%:
+```text
+======================================================================
+     MINI DESIGN-PATTERN SHOWCASE: NOTIFICATION DISPATCHER SYSTEM     
+     Members: Han Minh Dinh (22110021) & Tran Duc Trung (22110084)    
+======================================================================
+
+----------------------------------------------------------------------
+>>> SCENARIO 1: Happy Path End-to-End Pipeline
+----------------------------------------------------------------------
+[Preview Decorated Notification Details]
+[ID: ...] ... | To: dinhkore@gmail.com
+Content: [ENCRYPTED: W1BSSU9SSVRZOiBVUkdFTlRdCltFbWFpbCAtIFN1YmplY3Q6IE9PUCBGaW5hbCBQcm9qZWN0XQ...]
+----------------------------------------------------------------------
+[Sync Dispatch] Sent immediately to dinhkore@gmail.com -> [ENCRYPTED: ...]
+[SystemLogger] SUCCESS | strategy=Sync | id=... | to=dinhkore@gmail.com
+[MetricsTracker] Updated -> Dispatched: 1 | Success: 1 | Failed: 0
+[OK] Scenario 1 (Happy Path E2E) completed with all assertions passed.
+
+----------------------------------------------------------------------
+>>> SCENARIO 2: Validation & Error Handling (Rejecting Invalid Input)
+----------------------------------------------------------------------
+[SystemLogger] FAILED | id=... | to=invalid-email-address | reason=Invalid email address: invalid-email-address
+[MetricsTracker] Updated -> Dispatched: 1 | Success: 0 | Failed: 1
+[SystemLogger] FAILED | id=... | to=12345 | reason=Invalid phone number: 12345
+[MetricsTracker] Updated -> Dispatched: 2 | Success: 0 | Failed: 2
+[SystemLogger] FAILED | id=... | to=valid@gmail.com | reason=No dispatch strategy is set.
+[OK] Scenario 2 (Validation & Error Handling) completed with all assertions passed.
+
+----------------------------------------------------------------------
+>>> SCENARIO 3: Polymorphism & Runtime Strategy Swap
+----------------------------------------------------------------------
+-> Step 3.1: Using SyncDispatchStrategy (Immediate transmission):
+[Sync Dispatch] Sent immediately to 0912345678 -> [SMS] (Length: 33 chars) Message: Your verification code is 889900.
+[SystemLogger] SUCCESS | strategy=Sync | id=... | to=0912345678
+
+-> Step 3.2: Swapping to AsyncDispatchStrategy (Queue-based transmission):
+[Async Dispatch] Queued notification [ID: ...] for 0987654321 (Queue depth: 1)
+[SystemLogger] SUCCESS | strategy=Async | id=... | to=0987654321
+[OK] Scenario 3 (Polymorphism & Strategy Swap) completed with all assertions passed.
+
+----------------------------------------------------------------------
+>>> SCENARIO 4: Open/Closed Principle (OCP Proof - Adding PushNotification)
+----------------------------------------------------------------------
+[Sync Dispatch] Sent immediately to device_token_abc12345 -> [PRIORITY: HIGH] | [Push - Title: Server Maintenance] | Device: device_token_abc12345 | Payload: System will undergo scheduled maintenance at midnight.
+[SystemLogger] SUCCESS | strategy=Sync | id=... | to=device_token_abc12345
+[MetricsTracker] Updated -> Dispatched: 1 | Success: 1 | Failed: 0
+[OCP VERIFIED] Added PushNotification & PushNotificationCreator with ZERO edits to existing classes.
+[OK] Scenario 4 completed with all assertions passed.
+
+>>> ALL DEMO SCENARIOS & ASSERTIONS PASSED SUCCESSFULLY (100%) <<<
+```
+
+---
+
+## 7. Minh Chứng Kiểm Thử Tích Hợp (Test Scenarios)
 Lớp `Main.java` tự động chạy và kiểm chứng qua assertions (100% pass) cho 4 kịch bản:
 - **Scenario 1 (Happy Path E2E):** Khởi tạo bằng Factory Method $\rightarrow$ Lồng ghép Decorators (Priority + Encrypted) $\rightarrow$ Điều phối gửi qua Sync Strategy $\rightarrow$ Đa Observers (SystemLogger + MetricsTracker) ghi nhận thành công.
 - **Scenario 2 (Validation & Error Handling):** Chặn đứng và ghi log trạng thái thất bại khi email sai cú pháp regex, SMS sai độ dài, hoặc khi Dispatcher thiếu Strategy.
