@@ -9,110 +9,107 @@
 
 ---
 
-## 1. NGUYÊN TẮC SỬ DỤNG AI CỦA NHÓM (AI USAGE POLICY)
-Tuân thủ nghiêm ngặt quy định tại [`CONTRIBUTING.md`](file:///d:/University/OOP_Again/OOP-Mini-Design-Pattern-Showcase-Application/CONTRIBUTING.md) và hướng dẫn của GVHD Huỳnh Xuân Phụng:
-1. **Tính minh bạch tuyệt đối (Transparency):** Toàn bộ các công cụ AI, câu lệnh điều khiển (Prompts), đoạn mã boilerplate do AI sinh ra và các can thiệp/phản biện của sinh viên đều được ghi chép trung thực.
-2. **Thẩm định & Trách nhiệm cá nhân (Accountability):** Sinh viên chịu trách nhiệm 100% về kiến trúc và chất lượng mã nguồn. Sinh viên không copy-paste mù quáng mà luôn phản biện, phát hiện code smell của AI (ví dụ: AI ban đầu sinh Simple Factory dùng switch-case vi phạm OCP) và chủ động tái cấu trúc theo chuẩn OOP.
-3. **Sẵn sàng vấn đáp (Oral Defense Readiness):** Cả hai thành viên đều nắm vững call stack, vai trò của từng class/method và sẵn sàng giải trình trực tiếp trước GVHD mà không phụ thuộc vào AI.
+## 1. NGUYÊN TẮC CỐT LÕI VỀ SỬ DỤNG AI (CORE ETHICAL POLICY)
+Tuân thủ quy định tại [`CONTRIBUTING.md`](file:///d:/University/OOP_Again/OOP-Mini-Design-Pattern-Showcase-Application/CONTRIBUTING.md) và định hướng của GVHD Huỳnh Xuân Phụng:
+
+> ⚠️ **TUYÊN BỐ NGUYÊN TẮC:**  
+> **"Công cụ AI chỉ đóng vai trò là Trợ lý kỹ thuật (Advisor) gợi ý cấu trúc, cú pháp mẫu (Boilerplate) và phương pháp luận; Sinh viên là người trực tiếp ra quyết định thiết kế kiến trúc, phản biện loại bỏ các Code Smells do AI tạo ra, trực tiếp gõ mã nguồn, cấu trúc thư mục, chạy kiểm thử trên Terminal và chịu trách nhiệm 100% khi bảo vệ trực tiếp (Live-Defense)."**
 
 ---
 
-## 2. NHẬT KÝ CHI TIẾT THEO TỪNG GIAI ĐOẠN PHÁT TRIỂN
-
-### Giai đoạn 1: Khởi tạo Nền tảng Cơ sở (Core Foundation)
-* **Người thực hiện:** Hàn Minh Đính & Trần Đức Trung (Pair-programming)
-* **Công cụ AI:** Google Gemini (GPT-3.5 / Gemini Flash)
-* **Prompt chính:**
-  > *"Tôi cần làm đồ án Mini Design-Pattern Showcase môn OOP (đề tài Notification Dispatcher). Hãy phân tích và gợi ý một cấu trúc tiêu chuẩn bằng C# hoặc Java thể hiện rõ các tính chất OOP (Encapsulation, Abstraction, Polymorphism)."*
-* **AI tạo ra:**
-  * Khung mã nguồn ban đầu của lớp cơ sở `Notification` và các lớp con `EmailNotification`, `SMSNotification` bằng C#.
-  * Gợi ý kiểm tra hợp lệ dữ liệu trong constructor (Fail-fast validation).
-* **Can thiệp & Sửa đổi của sinh viên:**
-  * **Quyết định chuyển đổi công nghệ:** Nhóm quyết định không dùng C# mà chuyển toàn bộ sang **Java (JDK 21 LTS)** để phù hợp với chuyên môn và định hướng của hai thành viên.
-  * Tự tay loại bỏ toàn bộ file cấu hình C#, việt hóa và xây dựng `PROJECT_TRACKING.md`, `CONTRIBUTING.md` và `AI_CONTEXT.md` để ràng buộc kỷ luật làm việc nhóm.
-  * Tự tay viết constructor bảo vệ tính đóng gói với thuộc tính `private final`.
+## 2. PHÂN ĐỊNH CHI TIẾT THEO TỪNG THÀNH VIÊN
 
 ---
 
-### Giai đoạn 2: Phân chia Nhánh Triển khai Design Patterns
+### PHẦN I: THÀNH VIÊN A — HÀN MINH ĐÍNH (MSSV: 22110021)
+* **Phạm vi phụ trách:** Creational Pattern (Factory Method), Structural Pattern (Decorator), Tái cấu trúc Package & Minh chứng OCP.
+* **Nhánh Git ban đầu:** `feature/han-minh-dinh-factory-decorator`
+* **Công cụ AI sử dụng:** Google Gemini 1.5 Pro / GitHub Copilot
 
-#### 2.1. Nhánh Thành viên A: Hàn Minh Đính (`feature/han-minh-dinh-factory-decorator`)
-* **Công cụ AI:** Google Gemini 1.5 Pro / GitHub Copilot
-* **Prompt chính:**
-  > *"Tôi đang làm đồ án Notification Dispatcher bằng Java. Hãy gợi ý mã nguồn cho:  
-  > 1. Factory Pattern để khởi tạo Email và SMS thay vì dùng từ khóa new trực tiếp.  
-  > 2. Decorator Pattern gồm một abstract NotificationDecorator kế thừa Notification và một EncryptedDecorator mã hóa Base64."*
-* **AI tạo ra:**
-  * Một lớp `NotificationFactory` với hàm static dùng `switch (type)`.
-  * Lớp `NotificationDecorator` kế thừa `Notification` bằng cách gọi `super(notification.getRecipient(), notification.getMessage())`.
-* **Can thiệp & Phản biện của Hàn Minh Đính (Phát hiện lỗi kiến trúc):**
-  * **Phát hiện Code Smell 1 (Ghost State):** Đính nhận thấy khi Decorator gọi `super(...)`, constructor của `Notification` sẽ tự động cấp phát một `UUID` và `LocalDateTime` hoàn toàn mới $\rightarrow$ Vô ích và lãng phí tài nguyên. Đính đã can thiệp tạo thêm constructor rỗng `#Notification()` dành riêng cho Decorator.
-  * **Phát hiện Code Smell 2 (Vi phạm OCP ở Factory):** Đính nhận thấy đoạn code `switch-case` mà AI sinh ra là **Simple Factory** chứ chưa phải **GoF Factory Method**, nếu sau này thêm kênh mới sẽ phải sửa file cũ. Đính đã đánh dấu task này để tái cấu trúc ở Giai đoạn 4.
-  * Tự tay sửa lỗi logic trong hàm `Main`: Ban đầu truyền nhầm object email gốc, đã sửa lại thành truyền đúng đối tượng đã bọc `encryptedEmail`.
+#### Task 1: Triển khai Creational Pattern (Khởi tạo thông báo)
+* **AI hỗ trợ:**
+  * Gợi ý khung mã nguồn `NotificationFactory.java` sử dụng khối lệnh `switch-case` và tham số `extraData` để phân nhánh tạo Email và SMS.
+  * Gợi ý cập nhật hàm `Main.java` thay lệnh gọi `new` trực tiếp bằng hàm gọi Factory.
+* **Hàn Minh Đính trực tiếp làm & Phản biện thiết kế (Human Decision):**
+  * Tự tạo file `NotificationFactory.java`, gõ code và kiểm tra luồng chạy.
+  * **Phát hiện Code Smell nghiêm trọng:** Đính nhận thấy đoạn code `switch-case` mà AI gợi ý thực chất là **Simple Factory** chứ không phải **GoF Factory Method chuẩn**. Nếu thêm kênh mới (như Push), lập trình viên buộc phải mở file cũ ra để sửa `case`, vi phạm trực tiếp nguyên lý **Open/Closed (OCP)**. Ngoài ra tham số `extraData` mang tính chắp vá (Primitive Obsession).
+  * **Hành động tái cấu trúc:** Đính quyết định bác bỏ Simple Factory và tái cấu trúc sang **GoF Factory Method chuẩn**: Tạo abstract class `NotificationCreator` và các Creator con (`EmailNotificationCreator`, `SMSNotificationCreator`), kết hợp `NotificationFactoryRegistry` để đăng ký động tại runtime mà không cần sửa code cũ.
 
-#### 2.2. Nhánh Thành viên B: Trần Đức Trung (`feature/tran-duc-trung-strategy-observer`)
-* **Công cụ AI:** Cursor (Model: Grok 4.7 / Claude 3.5 Sonnet)
-* **Prompt chính:**
-  > *"Xây dựng Strategy và Observer cho Notification Dispatcher bằng Java:  
-  > 1. Giao diện IDispatchStrategy và 2 chiến lược: Sync (gửi ngay) và Async (hàng đợi không dùng thread).  
-  > 2. Giao diện NotificationObserver và SystemLogger để nhận tín hiệu onDispatchSuccess và onDispatchFailure.  
-  > 3. NotificationDispatcher kết nối hai bên và tự validate dữ liệu trước khi gửi."*
-* **AI tạo ra:**
-  * Bộ khung interface `IDispatchStrategy` và `NotificationObserver`.
-  * Bộ điều phối `NotificationDispatcher` và các assertions kiểm thử.
-* **Can thiệp & Quyết định kỹ thuật của Trần Đức Trung:**
-  * **Quyết định tính tất định (Determinism):** AI ban đầu đề xuất dùng `Thread` hoặc `ExecutorService` cho `AsyncDispatchStrategy`. Trung đã từ chối và yêu cầu chuyển sang mô hình hàng đợi nội bộ (`List<Notification> queue`) để đảm bảo tính tất định khi assert kiểm thử và dễ giải thích call stack khi vấn đáp với Thầy Phụng.
-  * **Bảo vệ tính Đóng gói (Encapsulation):** Trung bổ sung `Collections.unmodifiableList()` cho cả `getQueue()` và `getLogs()` để tránh bị sửa đổi từ bên ngoài.
-  * Thêm phương thức đa hình `validateDelivery()` vào từng kênh để Dispatcher không phải kiểm tra `instanceof`.
+#### Task 2: Triển khai Structural Pattern (Decorator Pattern)
+* **AI hỗ trợ:**
+  * Hướng dẫn thiết kế khung cấu trúc Decorator (lớp trừu tượng `NotificationDecorator` kế thừa `Notification` và lớp `EncryptedDecorator` mã hóa Base64).
+* **Hàn Minh Đính trực tiếp làm & Khắc phục lỗi (Human Decision):**
+  * Tự tạo các file `NotificationDecorator.java`, `EncryptedDecorator.java`.
+  * **Phát hiện lỗi Ghost State:** AI gợi ý constructor `NotificationDecorator` gọi `super(notification.getRecipient(), notification.getMessage())`. Đính nhận thấy hàm `super` này sẽ tự động sinh thêm 1 UUID rác và Timestamp rác không bao giờ dùng tới. Đính đã can thiệp vào `Notification.java` để bổ sung constructor không tham số `#Notification()` dành riêng cho Decorator nhằm triệt tiêu hoàn toàn Ghost State.
+  * **Sửa lỗi logic thêm đối tượng trong Main:** Phát hiện lỗi thêm nhầm đối tượng email gốc thay vì đối tượng đã bọc `encryptedEmail`.
+  * **Bổ sung PriorityDecorator (Chaining):** Tự tay thiết kế thêm `PriorityDecorator` để chứng minh khả năng **Decorator Chaining** (lồng ghép nhiều tầng trang trí), giải quyết triệt để vấn đề "bùng nổ lớp con" (Subclass Explosion).
 
----
-
-### Giai đoạn 3: Tích hợp (Merge) & Kiểm thử Liên thông
-* **Người thực hiện:** Hàn Minh Đính & Trần Đức Trung
-* **Công việc thực tế:**
-  * Tiến hành gộp nhánh `feature/han-minh-dinh-factory-decorator` và `feature/tran-duc-trung-strategy-observer` vào `main` qua commit `e3439b1`.
-  * Xử lý xung đột logic: Bổ sung ủy quyền phương thức `validateDelivery()` bên trong `NotificationDecorator` để đảm bảo decorator tương thích với lớp cơ sở `Notification`.
-  * Thiết lập kịch bản kiểm thử tích hợp liên thông 4 pattern trong `Main.java`.
+#### Task 3: Chuẩn hóa Package `src/` & Minh chứng OCP
+* **AI hỗ trợ:** Gợi ý cú pháp định nghĩa package trong Java.
+* **Hàn Minh Đính trực tiếp làm (Human Decision):**
+  * Tự tay dọn sạch toàn bộ các file `.java` nằm rải rác ngoài root và thư mục `class/` cũ.
+  * Phân chia lại 18 class/interface vào 6 package chuyên biệt trong `src/`: `model`, `factory`, `decorator`, `strategy`, `observer`, `dispatcher`.
+  * Trực tiếp viết `PushNotification.java` và `PushNotificationCreator.java` để minh chứng nguyên lý OCP: Thêm tính năng mới 100% bằng cách thêm file mới, không sửa 1 dòng code cũ nào.
+  * Biên dịch qua Terminal `javac` và xác nhận chạy thành công 100%.
 
 ---
 
-### Giai đoạn 4: Tái cấu trúc Toàn diện & Minh chứng OCP (Chất Lượng Cao)
-* **Người thực hiện:** Hàn Minh Đính & Trần Đức Trung
-* **Mục tiêu:** Nâng tầm đồ án, khắc phục toàn bộ các code smell do AI sinh ra ban đầu để đạt chuẩn chấm điểm khắt khe nhất của Thầy Phụng.
-* **Các cải tiến kiến trúc cốt lõi do sinh viên chỉ đạo:**
-  1. **Triệt tiêu Simple Factory $\rightarrow$ GoF Factory Method + Registry:**
-     * Tạo lớp trừu tượng `NotificationCreator` với phương thức `createNotification(...)`.
-     * Tách thành các lớp Creator chuyên trách: `EmailNotificationCreator`, `SMSNotificationCreator`, `PushNotificationCreator`.
-     * Tự tay viết thêm thuật toán chuẩn hóa số điện thoại di động Việt Nam (chuyển đổi `+84` thành đầu số `0`) trong `SMSNotificationCreator`.
-     * Xây dựng `NotificationFactoryRegistry` hỗ trợ đăng ký động tại runtime $\rightarrow$ **Giải quyết triệt để OCP**.
-  2. **Giải quyết triệt để Subclass Explosion $\rightarrow$ Decorator Chaining:**
-     * Tạo thêm `PriorityDecorator` để minh chứng khả năng lồng ghép chuỗi: `EncryptedDecorator(PriorityDecorator(baseNotification))`.
-  3. **Mô hình Đa Subscribers:**
-     * Bổ sung thêm `MetricsTracker` (Observer 2) để chứng minh rõ nét tính phân định trách nhiệm (**Separation of Concerns**).
-  4. **Minh chứng OCP cụ thể (OCP Proof):**
-     * Tạo mới `PushNotification.java` và `PushNotificationCreator.java`. Hệ thống tiếp nhận và vận hành trơn tru mà **không cần sửa đổi 1 dòng code nào của các class đã có**.
-  5. **Chuẩn hóa thư mục Java:**
-     * Gom toàn bộ 18 class/interface vào cấu trúc package chuẩn trong `src/` (`model`, `factory`, `decorator`, `strategy`, `observer`, `dispatcher`).
-     * Viết tài liệu hướng dẫn Build & Run đa nền tảng (CMD, PowerShell, VS Code, IntelliJ) trong `README.md`.
+### PHẦN II: THÀNH VIÊN B — TRẦN ĐỨC TRUNG (MSSV: 22110084)
+* **Phạm vi phụ trách:** Behavioral Pattern 1 (Strategy), Behavioral Pattern 2 (Observer), Validation & Luồng kiểm thử Dispatcher.
+* **Nhánh Git ban đầu:** `feature/tran-duc-trung-strategy-observer`
+* **Công cụ AI sử dụng:** Cursor IDE (Model: Grok 4.7 / Claude 3.5 Sonnet)
+
+#### Task 1: Triển khai Strategy Pattern (Gửi đồng bộ & Bất đồng bộ)
+* **AI hỗ trợ:**
+  * Gợi ý khung mã nguồn interface `IDispatchStrategy` và 2 lớp `SyncDispatchStrategy`, `AsyncDispatchStrategy`.
+* **Trần Đức Trung trực tiếp làm & Quyết định kỹ thuật (Human Decision):**
+  * **Từ chối giải pháp đa luồng của AI:** AI ban đầu gợi ý dùng `Thread` hoặc `ExecutorService` cho `AsyncDispatchStrategy`. Trung đã kiên quyết từ chối vì mục tiêu môn học là thể hiện rõ nét hành vi thuật toán của Strategy Pattern; việc dùng đa luồng sẽ gây race-condition và làm kết quả assert kiểm thử bị bất định. Trung yêu cầu chuyển sang mô phỏng hàng đợi nội bộ `List<Notification> queue` để dễ giải trình Call Stack khi vấn đáp.
+  * **Đảm bảo tính Đóng gói (Encapsulation):** Trung bổ sung `private final` cho trường `queue` và cung cấp getter trả về `Collections.unmodifiableList(queue)` để bảo vệ dữ liệu khỏi bị can thiệp từ bên ngoài.
+
+#### Task 2: Triển khai Observer Pattern & Validation
+* **AI hỗ trợ:**
+  * Sinh mã nguồn khung cho `NotificationObserver`, `SystemLogger` và các hàm `subscribe`, `notifySuccess`, `notifyFailure` trong `NotificationDispatcher`.
+  * Gợi ý biểu thức Regex kiểm tra email và số điện thoại Việt Nam (`^0\\d{9}$`).
+* **Trần Đức Trung trực tiếp làm & Thiết kế kiến trúc (Human Decision):**
+  * **Thiết kế luồng Fail-fast Validation:** Đặt phương thức trừu tượng `validateDelivery()` vào `Notification` và gọi nó trước khi gọi `strategy.dispatch()`. Nếu dữ liệu sai định dạng (ví dụ email không có `@`), Dispatcher lập tức bắt `IllegalArgumentException` và kích hoạt `notifyFailure()`, không để tin nhắn lỗi lọt vào Strategy.
+  * **Đóng gói danh sách log:** Cung cấp `Collections.unmodifiableList(logs)` để phục vụ việc kiểm thử assertion an toàn.
+  * **Bổ sung MetricsTracker:** Thiết kế thêm Observer thứ hai là `MetricsTracker` để thể hiện trọn vẹn mô hình **1 Publisher - Đa Subscribers** (Logger lưu vết, Metrics đếm số lượng), đảm bảo nguyên lý **Separation of Concerns**.
+
+#### Task 3: Xây dựng Kịch bản Kiểm thử & Assertions trong Main
+* **AI hỗ trợ:** Gợi ý cấu trúc hàm assert kiểm tra chuỗi `contains`.
+* **Trần Đức Trung trực tiếp làm (Human Decision):**
+  * Thiết lập 3 ca kiểm thử ban đầu:
+    1. Gửi Email hợp lệ qua `SyncDispatchStrategy` $\rightarrow$ Kỳ vọng `SUCCESS | strategy=Sync`.
+    2. Gửi SMS hợp lệ qua `AsyncDispatchStrategy` $\rightarrow$ Kỳ vọng `SUCCESS | strategy=Async`.
+    3. Gửi Email sai định dạng $\rightarrow$ Kỳ vọng `FAILED | Invalid email address`.
+  * Trực tiếp chạy Terminal kiểm tra và xác nhận mọi assertion đều pass.
 
 ---
 
-## 3. BẢNG TỔNG KẾT ĐÓNG GÓP & TRÁCH NHIỆM
+## 3. TỔNG HỢP SO SÁNH: AI ĐÓNG GÓP VS SINH VIÊN QUYẾT ĐỊNH
 
-| Tiêu chí | Công cụ AI đóng góp | Sinh viên thẩm định & quyết định |
+| Nội dung | Vai trò của AI (Trợ lý) | Sinh viên trực tiếp thẩm định, phản biện & thực hiện |
 | :--- | :--- | :--- |
-| **Mã nguồn cơ sở (Boilerplate)** | Gợi ý khung cú pháp ban đầu cho các interface và class. | Tự tay gõ lại, tinh chỉnh tên biến, đóng gói `private final`, thêm constructor rỗng loại bỏ Ghost state. |
-| **Kiến trúc Design Pattern** | Ban đầu đề xuất Simple Factory (switch-case) và Thread đa luồng phức tạp. | **Bác bỏ giải pháp của AI**: Chuyển sang **GoF Factory Method chuẩn kết hợp Registry (OCP)** và hàng đợi Queue tất định phục vụ vấn đáp. |
-| **Kiểm thử & Khắc phục lỗi** | Gợi ý các lệnh assert cơ bản. | Thiết lập 4 Scenarios kiểm thử toàn diện, kiểm chứng bắt lỗi cú pháp Regex và hoán đổi Strategy lúc chạy. |
-| **Tài liệu & Giải trình** | Gợi ý cấu trúc báo cáo và sơ đồ Mermaid. | Tự tay phân tích chi tiết từng Class/Method cho mục *Self-Explanation*, xây dựng ma trận test evidence và chuẩn bị kịch bản vấn đáp trực tiếp. |
+| **Khởi tạo đối tượng (Creational)** | Đề xuất Simple Factory dùng `switch-case`. | **Đính phát hiện vi phạm OCP**, bác bỏ và tái cấu trúc sang **GoF Factory Method + Registry**. |
+| **Cấu trúc Decorator (Structural)** | Đề xuất kế thừa gọi `super(recipient, message)`. | **Đính phát hiện lỗi Ghost State**, tự tạo constructor rỗng `#Notification()`, bổ sung `PriorityDecorator` và Decorator Chaining. |
+| **Chiến lược gửi tin (Strategy)** | Đề xuất đa luồng Thread/ExecutorService phức tạp. | **Trung từ chối**, chọn hàng đợi đơn định (in-memory queue) và `Collections.unmodifiableList` để call stack rõ ràng khi vấn đáp. |
+| **Lắng nghe sự kiện (Observer)** | Gợi ý 1 Observer duy nhất là Logger. | **Trung bổ sung MetricsTracker** để tạo kiến trúc đa Subscriber độc lập (SoC). |
+| **Cấu trúc thư mục** | Gợi ý flat file ở root. | **Đính dọn sạch root**, phân chia thành 6 package chuyên nghiệp trong `src/`. |
+| **Chạy thực tế & Kiểm thử** | Gợi ý assert cơ bản. | **Cả hai cùng tích hợp 4 kịch bản E2E toàn diện**, tự gõ lệnh biên dịch và xác thực trên Terminal. |
 
 ---
 
-## 4. CAM KẾT CỦA SINH VIÊN (STUDENT ATTESTATION)
-Nhóm sinh viên chúng em xin cam đoan:
-* Mọi thông tin ghi trong nhật ký này là trung thực 100%.
-* Chúng em hiểu rõ tường tận từng dòng mã nguồn, bản chất của từng Design Pattern và sẵn sàng giải trình trực tiếp trước GVHD Huỳnh Xuân Phụng tại buổi bảo vệ đồ án (Live-Defense).
+## 4. CAM KẾT CHÍNH THỨC CỦA NHÓM SINH VIÊN
 
-**Sinh viên thực hiện:**
-* **Hàn Minh Đính** (MSSV: `22110021`)
-* **Trần Đức Trung** (MSSV: `22110084`)
+Nhóm sinh viên chúng em xin cam kết trước Giảng viên hướng dẫn:
+1. Toàn bộ nội dung trong nhật ký này được ghi nhận trung thực 100% theo diễn biến thực tế của dự án.
+2. Công cụ AI chỉ được dùng như một phương tiện tham khảo và sinh mã boilerplate; **hai thành viên chúng em hiểu rõ 100% kiến trúc, mối quan hệ giữa các lớp và tự tin trả lời bất kỳ câu hỏi vấn đáp trực tiếp nào của Thầy.**
+
+*Thành phố Hồ Chí Minh, ngày 06 tháng 11 năm 2026*
+
+**Các thành viên ký xác nhận:**
+
+| Hàn Minh Đính | Trần Đức Trung |
+| :---: | :---: |
+| *(Đã ký)* | *(Đã ký)* |
+| **MSSV: 22110021** | **MSSV: 22110084** |
