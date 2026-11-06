@@ -1,3 +1,9 @@
+package model;
+
+/**
+ * Concrete Subclass đại diện cho thông báo dạng SMS.
+ * Cài đặt xác thực số điện thoại chuẩn Việt Nam (10 chữ số bắt đầu bằng số 0).
+ */
 public class SMSNotification extends Notification {
 
     public SMSNotification(String recipient, String message) {

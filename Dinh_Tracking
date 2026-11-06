@@ -31,3 +31,21 @@ feat: Hoàn thiện Decorator Pattern mã hóa và cập nhật kiểm thử Mai
 - Tự tạo các file NotificationDecorator.java, EncryptedDecorator.java và thêm mã nguồn vô từng file.
 - Sửa lại dòng add trong Main.java để truyền đúng encryptedEmail.
 - Trực tiếp chạy biên dịch qua Terminal, kiểm tra kết quả in ra đúng định dạng và thực hiện commit.
+
+
+feat: Nâng cấp GoF Factory Method, Decorator Chaining và chuẩn hóa package src/
+
+[Chi tiết]
+- Refactor NotificationFactory từ Simple Factory (switch-case) thành GoF Factory Method chuẩn: NotificationCreator, EmailNotificationCreator, SMSNotificationCreator, PushNotificationCreator và NotificationFactoryRegistry.
+- Khắc phục triệt để lỗi OCP: Khi thêm kênh PushNotification, không cần sửa đổi bất kỳ class nào cũ mà đăng ký qua Registry.
+- Khắc phục code smell ở NotificationDecorator (loại bỏ việc gọi super với chuỗi TEMP, loại bỏ ghost state), bổ sung PriorityDecorator để minh chứng Decorator Chaining.
+- Chuyển toàn bộ cấu trúc dự án vào thư mục src/ phân theo package chuẩn: model, factory, decorator, strategy, observer, dispatcher.
+
+[AI làm]
+- Gợi ý kiến trúc GoF Factory Method kết hợp Registry để tuân thủ 100% nguyên lý OCP.
+- Gợi ý giải pháp no-arg constructor cho lớp Notification để loại bỏ ghost state của Decorator.
+
+[Người làm]
+- Tự tay tạo các class Creator con, PriorityDecorator và MetricsTracker.
+- Cấu trúc lại toàn bộ package trong src/ và xóa các file rải rác ngoài root.
+- Biên dịch javac và xác nhận toàn bộ 4 kịch bản kiểm thử chạy thành công 100%.

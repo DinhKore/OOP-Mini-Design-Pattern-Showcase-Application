@@ -1,11 +1,17 @@
 # Workflow & Task Assignments
 
-Dự án được chia thành các Giai đoạn (Phases) nối tiếp nhau. Hoàn thành `[x]` từng task để sang giai đoạn tiếp theo.
+**Dự án:** Mini Design-Pattern Showcase Application  
+**Môn học:** Lập trình Hướng đối tượng (OOP) — HK1 2026-2027  
+**Thành viên thực hiện:**
+- **Hàn Minh Đính** — MSSV: `22110021` (Thành viên A)
+- **Trần Đức Trung** — MSSV: `22110084` (Thành viên B)
+
+---
 
 ## Giai đoạn 1: Nền Tảng (Core Foundation)
 *Mục tiêu: Xây dựng bộ khung cơ sở vững chắc. Cả hai thành viên cùng làm (Pair-programming) hoặc review chéo trực tiếp.*
 
-- [x] Khởi tạo dự án Java.
+- [x] Khởi tạo dự án Java và cấu trúc tài liệu.
 - [x] Thiết kế Abstract Base Class `Notification` (Áp dụng Encapsulation, định nghĩa Abstraction).
 - [x] Thiết kế các Subclasses cơ bản: `EmailNotification`, `SMSNotification` (Áp dụng Polymorphism).
 - [x] Viết test case (Happy path) để khởi tạo và in ra thông tin Base classes.
@@ -14,28 +20,28 @@ Dự án được chia thành các Giai đoạn (Phases) nối tiếp nhau. Hoà
 ## Giai đoạn 2: Phân Chia Triển Khai Design Patterns
 *Mục tiêu: Chia đôi luồng công việc để tối ưu thời gian. Mỗi người chịu trách nhiệm code và tự giải trình cho Pattern của mình.*
 
-**Thành viên A (Hàn Minh Đính):**
-- [x] **Factory Method Pattern:** Cài đặt `NotificationFactory` để khởi tạo Email/SMS.
-- [x] **Decorator Pattern:** Cài đặt abstract `NotificationDecorator` và `EncryptedDecorator`.
+**Thành viên A (Hàn Minh Đính - 22110021):**
+- [x] **Factory Method Pattern (GoF):** Cài đặt `NotificationCreator`, `EmailNotificationCreator`, `SMSNotificationCreator` và `NotificationFactoryRegistry`.
+- [x] **Decorator Pattern:** Cài đặt abstract `NotificationDecorator`, `EncryptedDecorator` và `PriorityDecorator` (hỗ trợ Chaining).
 - [ ] Viết Tự giải trình (Self-Explanation): Vấn đề trước khi dùng (Code smell) & Giải pháp áp dụng OOP.
 
-**Thành viên B (Trần Đức Trung):**
-- [x] **Strategy Pattern:** Cài đặt giao diện `IDispatchStrategy` và các concrete strategy (VD: Gửi đồng bộ, Gửi bất đồng bộ).
-- [x] **Observer Pattern:** Cài đặt cơ chế Event/Observer để lắng nghe trạng thái gửi tin (VD: `SystemLogger`).
+**Thành viên B (Trần Đức Trung - 22110084):**
+- [x] **Strategy Pattern:** Cài đặt giao diện `IDispatchStrategy` và các concrete strategy (`SyncDispatchStrategy`, `AsyncDispatchStrategy`).
+- [x] **Observer Pattern:** Cài đặt cơ chế Event/Observer (`NotificationObserver`, `SystemLogger`, `MetricsTracker`).
 - [ ] Viết Tự giải trình (Self-Explanation): Vấn đề trước khi dùng (Code smell) & Giải pháp áp dụng OOP.
 
 ## Giai đoạn 3: Tích Hợp & Minh Chứng OCP
 *Mục tiêu: Gộp code, xử lý tương tác giữa các patterns và chứng minh hệ thống dễ mở rộng.*
 
 - [x] Gộp toàn bộ mã nguồn (Merge code). Cả hai cùng kiểm tra xung đột (Conflicts).
-- [x] Cài đặt kịch bản luồng chính (End-to-End Test): Tạo thông báo bằng Factory -> Bọc bằng Decorator -> Gửi bằng Strategy -> Ghi log bằng Observer.
-- [x] Cài đặt kịch bản xử lý lỗi (Error/Validation Test): Bắt lỗi khi người dùng nhập sai định dạng hoặc thiếu dữ liệu.
-- [ ] **Chứng minh Open/Closed Principle:** Cùng nhau thêm 1 loại thông báo mới (VD: `PushNotification`) chỉ bằng cách thêm class, tuyệt đối KHÔNG sửa code cũ.
+- [x] Cài đặt kịch bản luồng chính (End-to-End Test): Tạo thông báo bằng Factory Method -> Bọc lồng Decorator -> Gửi bằng Strategy -> Ghi nhận đồng thời qua nhiều Observers.
+- [x] Cài đặt kịch bản xử lý lỗi (Error/Validation Test): Bắt lỗi khi người dùng nhập sai định dạng hoặc thiếu dữ liệu tại runtime.
+- [x] **Chứng minh Open/Closed Principle:** Bổ sung `PushNotification` và `PushNotificationCreator` vào hệ thống qua Registry mà tuyệt đối KHÔNG cần sửa đổi 1 dòng code nào của các class đã có.
 
 ## Giai đoạn 4: Hoàn Thiện & Báo Cáo
 *Mục tiêu: Dọn dẹp mã nguồn, xuất tài liệu và chuẩn bị bảo vệ.*
 
-- [ ] Refactor mã nguồn (Đảm bảo Separation of Concerns - không có "God class").
+- [x] Refactor mã nguồn (Đảm bảo Separation of Concerns - không có "God class", chuẩn hóa cấu trúc package `src/`).
 - [ ] Vẽ UML Class Diagram hoàn chỉnh cho toàn hệ thống.
 - [ ] Tổng hợp file Tự giải trình các nguyên lý (Encapsulation, Polymorphism, Abstraction, OCP, SoC).
 - [ ] Tổng hợp file AI Usage Log từ lịch sử Commit Git.

@@ -1,5 +1,11 @@
+package model;
+
+/**
+ * Concrete Subclass đại diện cho thông báo dạng Email.
+ * Mở rộng thuộc tính subject và cài đặt xác thực địa chỉ email bằng Regex.
+ */
 public class EmailNotification extends Notification {
-    private String subject;
+    private final String subject;
 
     public EmailNotification(String recipient, String subject, String message) {
         super(recipient, message);
@@ -7,7 +13,7 @@ public class EmailNotification extends Notification {
         if (subject == null || subject.trim().isEmpty()) {
             throw new IllegalArgumentException("Email subject cannot be empty.");
         }
-        this.subject = subject;
+        this.subject = subject.trim();
     }
 
     public String getSubject() {
