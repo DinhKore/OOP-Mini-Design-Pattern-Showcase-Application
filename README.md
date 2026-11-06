@@ -89,16 +89,14 @@ OOP-Mini-Design-Pattern-Showcase-Application/
 ### Yêu cầu môi trường:
 - **Java Development Kit (JDK):** Java 17 LTS hoặc Java 21 LTS trở lên.
 
-### Lệnh biên dịch:
-Trên Windows PowerShell:
-```powershell
-javac -d bin (Get-ChildItem -Recurse src/*.java | ForEach-Object { $_.FullName })
+### Lệnh biên dịch (Chạy được trên mọi Terminal: CMD, PowerShell, Bash, Git Bash):
+```bash
+javac -d bin -sourcepath src src/Main.java
 ```
 
-Trên Linux / macOS / Bash:
-```bash
-javac -d bin $(find src -name "*.java")
-```
+*(Hoặc dùng lệnh quét đệ quy nếu muốn)*:
+- **PowerShell:** `javac -d bin (Get-ChildItem -Recurse src/*.java | ForEach-Object { $_.FullName })`
+- **Linux / macOS / Bash:** `javac -d bin $(find src -name "*.java")`
 
 ### Lệnh chạy demo:
 ```bash
