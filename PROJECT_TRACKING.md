@@ -23,12 +23,12 @@
 **Thành viên A (Hàn Minh Đính - 22110021):**
 - [x] **Factory Method Pattern (GoF):** Cài đặt `NotificationCreator`, `EmailNotificationCreator`, `SMSNotificationCreator` và `NotificationFactoryRegistry`.
 - [x] **Decorator Pattern:** Cài đặt abstract `NotificationDecorator`, `EncryptedDecorator` và `PriorityDecorator` (hỗ trợ Chaining).
-- [ ] Viết Tự giải trình (Self-Explanation): Vấn đề trước khi dùng (Code smell) & Giải pháp áp dụng OOP.
+- [x] Viết Tự giải trình (Self-Explanation): Vấn đề trước khi dùng (Code smell) & Giải pháp áp dụng OOP (đã hoàn thiện trong `REPORT.md`).
 
 **Thành viên B (Trần Đức Trung - 22110084):**
 - [x] **Strategy Pattern:** Cài đặt giao diện `IDispatchStrategy` và các concrete strategy (`SyncDispatchStrategy`, `AsyncDispatchStrategy`).
 - [x] **Observer Pattern:** Cài đặt cơ chế Event/Observer (`NotificationObserver`, `SystemLogger`, `MetricsTracker`).
-- [ ] Viết Tự giải trình (Self-Explanation): Vấn đề trước khi dùng (Code smell) & Giải pháp áp dụng OOP.
+- [x] Viết Tự giải trình (Self-Explanation): Vấn đề trước khi dùng (Code smell) & Giải pháp áp dụng OOP (đã hoàn thiện trong `REPORT.md`).
 
 ## Giai đoạn 3: Tích Hợp & Minh Chứng OCP
 *Mục tiêu: Gộp code, xử lý tương tác giữa các patterns và chứng minh hệ thống dễ mở rộng.*
@@ -42,7 +42,7 @@
 *Mục tiêu: Dọn dẹp mã nguồn, xuất tài liệu và chuẩn bị bảo vệ.*
 
 - [x] Refactor mã nguồn (Đảm bảo Separation of Concerns - không có "God class", chuẩn hóa cấu trúc package `src/`).
-- [ ] Vẽ UML Class Diagram hoàn chỉnh cho toàn hệ thống.
-- [ ] Tổng hợp file Tự giải trình các nguyên lý (Encapsulation, Polymorphism, Abstraction, OCP, SoC).
-- [ ] Tổng hợp file AI Usage Log từ lịch sử Commit Git.
-- [ ] Review chéo mã nguồn để chuẩn bị Live-defense.
+- [x] Vẽ UML Class Diagram hoàn chỉnh cho toàn hệ thống (Mermaid & PlantUML trong `REPORT.md`).
+- [x] Tổng hợp file Tự giải trình các nguyên lý (Encapsulation, Polymorphism, Abstraction, OCP, SoC) trong `REPORT.md`.
+- [x] Tổng hợp file `AI_USAGE_LOG.md` chính thức cho cả 2 thành viên từ lịch sử Commit Git.
+- [x] Review chéo mã nguồn và xây dựng kịch bản chuẩn bị Live-defense trong `REPORT.md`.
